@@ -28,7 +28,7 @@ namespace Pong
         private static Dictionary<AudioType, AudioData> m_audioLevels = new Dictionary<AudioType, AudioData>();
         private static AudioManager Instance = null;
 
-        private static string m_audioDataPath = ".txt";
+        private static string m_audioDataPath = "- AudioData.txt";
 
         public AudioType m_managedAudioType = AudioType.MUSIC;
 

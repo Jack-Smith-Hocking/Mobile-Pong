@@ -65,7 +65,10 @@ namespace Pong
                 {
                     if (_currentHit.transform != null)
                     {
-                        Debug.DrawRay((Vector3)_rayPos, (Vector3)_rayDir * 1000, Color.red, 0.1f);
+                        Color _rayCol = Color.red;
+                        if (m_playerID == PlayerID.PLAYER_TWO) _rayCol = Color.blue;
+
+                        Debug.DrawRay((Vector3)_rayPos, (Vector3)_rayDir * 1000, _rayCol, 0.1f);
 
                         _rayDir = Vector2.Reflect(_rayDir, _currentHit.normal);
                         _rayPos = _currentHit.point;
@@ -143,9 +146,6 @@ namespace Pong
             Vector3 _target = transform.position;
             _target.y = m_targetPos.y;
             transform.position = Vector3.MoveTowards(transform.position, _target, m_moveSpeed * Time.deltaTime);
-
-            //transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, m_targetPos.y, m_moveSpeed * Time.deltaTime), 0);
-            //transform.position = Vector3.Lerp(transform.position, _target, m_moveSpeed * Time.deltaTime);
         }
     }
 }

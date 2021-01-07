@@ -29,7 +29,7 @@ namespace Pong
         public string m_playerText = "Player";
         public string m_aiText = "A.I";
         [Space]
-        public InputField m_winScoreInput = null;
+        public TMP_InputField m_winScoreInput = null;
 
         private TextMeshProUGUI m_playerOneStateText = null;
         private TextMeshProUGUI m_playerTwoStateText = null;
@@ -43,7 +43,7 @@ namespace Pong
 
         void InitMatchData()
         {
-            m_matchFilePath = Application.persistentDataPath + " - Match.txt";
+            m_matchFilePath = Application.persistentDataPath + " - MatchData.txt";
             LoadMatchSettings();
 
             m_playerOneStateText = m_playerOneState.GetComponentInChildren<TextMeshProUGUI>();
@@ -51,6 +51,12 @@ namespace Pong
 
             StateButtonListener(m_playerOneState, m_playerOneStateText, PlayerID.PLAYER_ONE);
             StateButtonListener(m_playerTwoState, m_playerTwoStateText, PlayerID.PLAYER_TWO);
+
+            m_winScoreInput.text = m_matchSettings.m_scoreToWin.ToString();
+            m_winScoreInput.onValueChanged.AddListener((string val) =>
+            {
+                m_matchSettings.m_scoreToWin = int.Parse(val);
+            });
         }
 
         #region PaddleStateHandlers
