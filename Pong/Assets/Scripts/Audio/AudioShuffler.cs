@@ -7,10 +7,11 @@ using UnityEngine;
 public class AudioShuffler : MonoBehaviour
 {
     public List<AudioClip> m_clips = new List<AudioClip>();
+    public bool m_allowFadIn = true;
     [Range(0, 1)] public float m_fadeInPercent;
     [Range(0, 1)] public float m_fadeOutPercent;
 
-    private float m_startVolume;
+    private float m_baseVolume;
 
     private AudioSource m_audioSource;
 
@@ -19,7 +20,7 @@ public class AudioShuffler : MonoBehaviour
     public void Start()
     {
         m_audioSource = GetComponent<AudioSource>();
-        m_startVolume = m_audioSource.volume;
+        m_baseVolume = m_audioSource.volume;
 
         ChangeClips(GetRandomClip());
     }
@@ -31,9 +32,12 @@ public class AudioShuffler : MonoBehaviour
             m_previousClip = m_audioSource.clip;
             m_audioSource.clip = newClip;
 
-            float _fadeInTime = m_audioSource.clip.length * m_fadeInPercent;
-            float _fadeIn = (m_audioSource.time / _fadeInTime);
-            m_audioSource.volume = m_startVolume * _fadeIn;
+            if (m_allowFadIn)
+            {
+                float _fadeInTime = m_audioSource.clip.length * m_fadeInPercent;
+                float _fadeIn = (m_audioSource.time / _fadeInTime);
+                m_audioSource.volume = m_baseVolume * _fadeIn;
+            }
 
             m_audioSource.Play();
         }
@@ -43,19 +47,22 @@ public class AudioShuffler : MonoBehaviour
     {
         if (m_audioSource.clip != null)
         {
-            float _fadeInTime = m_audioSource.clip.length * m_fadeInPercent;
-            if (m_audioSource.time < _fadeInTime)
+            if (m_allowFadIn)
             {
-                float _fadeIn = (m_audioSource.time / _fadeInTime);
-                m_audioSource.volume = m_startVolume * _fadeIn;
-            }
+                float _fadeInTime = m_audioSource.clip.length * m_fadeInPercent;
+                if (m_audioSource.time < _fadeInTime)
+                {
+                    float _fadeIn = (m_audioSource.time / _fadeInTime);
+                    m_audioSource.volume = m_baseVolume * _fadeIn;
+                }
 
-            float _fadeOutTime = m_audioSource.clip.length * m_fadeOutPercent;
-            if (m_audioSource.time > (m_audioSource.clip.length - _fadeOutTime))
-            {
-                float _currentTime = m_audioSource.clip.length - m_audioSource.time;
-                float _fadeOut = (_currentTime / _fadeOutTime);
-                m_audioSource.volume = m_startVolume * _fadeOut;
+                float _fadeOutTime = m_audioSource.clip.length * m_fadeOutPercent;
+                if (m_audioSource.time > (m_audioSource.clip.length - _fadeOutTime))
+                {
+                    float _currentTime = m_audioSource.clip.length - m_audioSource.time;
+                    float _fadeOut = (_currentTime / _fadeOutTime);
+                    m_audioSource.volume = m_baseVolume * _fadeOut;
+                }
             }
 
             if (!m_audioSource.isPlaying)

@@ -6,7 +6,7 @@ using Custom.Utility.Mobile;
 namespace Pong
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerPaddle : Controller
+    public class PlayerPaddle : PongController
     {
         public bool m_useMobileControls = false;
 
@@ -24,9 +24,6 @@ namespace Pong
 
         private void FixedUpdate()
         {
-            Vector3 _validPosition = m_targetPos;
-            _validPosition.y = Mathf.Clamp(transform.position.y, m_verticalBounds.x, m_verticalBounds.y);
-
             m_rigidbody.MovePosition(m_targetPos);
         }
         protected override void Move()
@@ -52,7 +49,7 @@ namespace Pong
                     m_targetPos.y = transform.position.y;
                 }
 
-                m_targetPos.x = Mathf.Lerp(transform.position.x, m_targetPos.y, m_moveSpeed * Time.fixedDeltaTime);
+                m_targetPos.y = Mathf.Lerp(transform.position.y, m_targetPos.y, m_moveSpeed * Time.fixedDeltaTime);
             }
             else
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using System.IO;
 
 namespace Custom.Utility
 {
@@ -1183,6 +1184,49 @@ namespace Custom.Utility
         public bool IsBitSet(int bit)
         {
             return (m_lockVal & (1 << bit)) != 0;
+        }
+    }
+    #endregion
+
+    // File
+    #region FileOperations
+    public class FileUtil
+    {
+        public static T LoadData<T>(string path, out bool loaded)
+        {
+            T _returnVal = default;
+
+            if (File.Exists(path))
+            {
+                loaded = true;
+
+                using (var _read = new StreamReader(path))
+                {
+                    string _data = _read.ReadToEnd();
+                    _returnVal = JsonUtility.FromJson<T>(_data);
+                }
+
+                return _returnVal;
+            }
+
+            loaded = false;
+            return _returnVal;
+        }
+        public static void SaveData<T>(T data, string path)
+        {
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+
+            File.Create(path).Dispose();
+
+            string _serialisedData = JsonUtility.ToJson(data, false);
+
+            using (var _write = new StreamWriter(path))
+            {
+                _write.Write(_serialisedData);
+            }
         }
     }
     #endregion

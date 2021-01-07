@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using TMPro;
+using Custom.Utility;
 
 namespace Pong
 {
@@ -16,12 +17,11 @@ namespace Pong
         public int m_scoreToWin;
     }
 
-    public class Settings : MonoBehaviour
+    public class Settings : MonoBehaviour, ISave
     {
-        public static Settings Instance = null;
-
+        public static string m_matchFilePath { get; private set; } = ".txt";
         public static MatchSettings m_matchSettings = new MatchSettings();
-        public static string m_matchFilePath = ".txt";
+
 
         [Header("Match UI")]
         public Button m_playerOneState = null;
@@ -34,18 +34,16 @@ namespace Pong
         private TextMeshProUGUI m_playerOneStateText = null;
         private TextMeshProUGUI m_playerTwoStateText = null;
 
-        public void Awake()
-        {
-            Instance = this;
-        }
         private void Start()
         {
+            SaveManager.Instance.m_saveDatas.Add(this);
+
             InitMatchData();
         }
 
         void InitMatchData()
         {
-            m_matchFilePath = Application.persistentDataPath + ".txt";
+            m_matchFilePath = Application.persistentDataPath + " - Match.txt";
             LoadMatchSettings();
 
             m_playerOneStateText = m_playerOneState.GetComponentInChildren<TextMeshProUGUI>();
@@ -152,7 +150,7 @@ namespace Pong
         public static void LoadMatchSettings()
         {
             bool _loadedFile = false;
-            m_matchSettings = LoadSettings<MatchSettings>(m_matchFilePath, out _loadedFile);
+            m_matchSettings = FileUtil.LoadData<MatchSettings>(m_matchFilePath, out _loadedFile);
 
             if (!_loadedFile)
             {
@@ -161,49 +159,17 @@ namespace Pong
         }
         public static void StaticSaveMatchSettings()
         {
-            SaveSettings<MatchSettings>(m_matchSettings, m_matchFilePath);
+            FileUtil.SaveData<MatchSettings>(m_matchSettings, m_matchFilePath);
         }
         public void SaveMatchSettings()
         {
-            SaveSettings<MatchSettings>(m_matchSettings, m_matchFilePath);
+            StaticSaveMatchSettings();
+        }
+
+        public void Save()
+        {
+            StaticSaveMatchSettings();
         }
         #endregion
-
-        static T LoadSettings<T>(string path, out bool loaded)
-        {
-            T _returnVal = default;
-
-            if (File.Exists(path))
-            {
-                loaded = true;
-
-                using (var _read = new StreamReader(path))
-                {
-                    string _data = _read.ReadToEnd();
-                    _returnVal = JsonUtility.FromJson<T>(_data);
-                }
-
-                return _returnVal;
-            }
-
-            loaded = false;
-            return _returnVal;
-        }
-        static void SaveSettings<T>(T settings, string path)
-        {
-            if (File.Exists(path))
-            {
-                File.Delete(path);
-            }
-
-            File.Create(path).Dispose();
-
-            string _serialisedData = JsonUtility.ToJson(settings, false);
-
-            using (var _write = new StreamWriter(path))
-            {
-                _write.Write(_serialisedData);
-            }
-        }
     }
 }

@@ -10,7 +10,7 @@ namespace Pong
         PLAYER_TWO = 1
     }
 
-    public class Controller : MonoBehaviour
+    public abstract class PongController : MonoBehaviour
     {
         public PlayerID m_playerID = PlayerID.PLAYER_ONE;
         [Min(0.1f)] public float m_moveSpeed = 5;
@@ -73,7 +73,7 @@ namespace Pong
             transform.position = _validPosition;
         }
 
-        protected virtual void Move() { }
+        protected abstract void Move();
 
         protected bool WithinBounds(Vector2 position)
         {

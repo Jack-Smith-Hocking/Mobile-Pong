@@ -13,7 +13,7 @@ namespace Pong
         }
     }
 
-    public class AIPaddle : Controller
+    public class AIPaddle : PongController
     {
         public Transform m_fakeBackWall = null;
         [Space]

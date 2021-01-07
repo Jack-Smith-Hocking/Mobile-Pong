@@ -96,6 +96,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-2708357000565274290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5875519136749333838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fbf58b1732067940a32b8636c4eaaf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_instanceType: 1
 --- !u!1001 &5875519136749431790
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -105,7 +118,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: f06e78284f831ae469c74624ab5d513b, type: 3}
       propertyPath: m_Name
-      value: Change Direction FX Variant
+      value: Change Direction FX
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f06e78284f831ae469c74624ab5d513b, type: 3}
       propertyPath: m_LocalPosition.x
