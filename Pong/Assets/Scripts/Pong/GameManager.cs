@@ -12,6 +12,7 @@ namespace Pong
 
         public Dictionary<PlayerID, int> m_playerScores = new Dictionary<PlayerID, int>();
 
+        public bool m_canWin = true;
         public int m_scoreToWin = 10;
         public TextMeshProUGUI m_winnerText = null;
         public UnityEvent m_onWinEvent;
@@ -64,7 +65,10 @@ namespace Pong
 
             if (m_scoreToWin > 0 && m_playerScores[player] >= m_scoreToWin)
             {
-                WinGame(playerName);
+                if (m_canWin)
+                {
+                    WinGame(playerName);
+                }
             }
         }
 

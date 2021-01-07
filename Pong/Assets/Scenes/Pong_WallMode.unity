@@ -3358,6 +3358,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1144203303397132501, guid: aed74d21dae3e444bb4b90ca046fed93,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1144203303416453616, guid: aed74d21dae3e444bb4b90ca046fed93,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1144203303607672139, guid: aed74d21dae3e444bb4b90ca046fed93,
         type: 3}
       propertyPath: m_Name
@@ -3597,6 +3607,11 @@ PrefabInstance:
       propertyPath: m_scoreToWin
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 329415772341337963, guid: 245388e3cfdd03b43b67df82196bdf0b,
+        type: 3}
+      propertyPath: m_canWin
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 245388e3cfdd03b43b67df82196bdf0b, type: 3}
 --- !u!1 &1326539650517464043 stripped
@@ -3633,6 +3648,7 @@ MonoBehaviour:
     m_playerOneState: 0
     m_playerTwoState: 0
     m_scoreToWin: 0
+  m_scoreText: {fileID: 0}
   m_paddleOneAI: {fileID: 389140627}
   m_paddleOnePlayer: {fileID: 389140624}
   m_paddleTwoAI: {fileID: 0}
@@ -3671,7 +3687,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 1
+          m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2

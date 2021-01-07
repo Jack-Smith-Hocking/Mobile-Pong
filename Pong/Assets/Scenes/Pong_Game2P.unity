@@ -3117,6 +3117,16 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2946886350859558620, guid: aed74d21dae3e444bb4b90ca046fed93,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3086459077198216310, guid: aed74d21dae3e444bb4b90ca046fed93,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3697336590124161923, guid: aed74d21dae3e444bb4b90ca046fed93,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -4208,6 +4218,16 @@ PrefabInstance:
       propertyPath: m_onWinEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 329415772341337963, guid: 245388e3cfdd03b43b67df82196bdf0b,
+        type: 3}
+      propertyPath: m_onWinEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 329415772341337963, guid: 245388e3cfdd03b43b67df82196bdf0b,
+        type: 3}
+      propertyPath: m_onWinEvent.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 245388e3cfdd03b43b67df82196bdf0b, type: 3}
 --- !u!1 &1326539650517464043 stripped
@@ -4271,7 +4291,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2

@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Pong_Menu.unity
     guid: 6cb34694d537fc14da77300ee03132cf
   - enabled: 1
-    path: Assets/Scenes/Pong_WallMode.unity
-    guid: 3089707e8ccee2e4fbe31aabcfc65880
-  - enabled: 1
     path: Assets/Scenes/Pong_Game2P.unity
     guid: 4b98b2b6671b1f441a088a66a403d064
+  - enabled: 1
+    path: Assets/Scenes/Pong_WallMode.unity
+    guid: 3089707e8ccee2e4fbe31aabcfc65880
   m_configObjects: {}

@@ -50,6 +50,11 @@ namespace Custom.Utility.Mobile
 
             StartCoroutine(TrackMainInputPhase());
             TrackMainPositionDelta();
+
+            if (MainInputPressed)
+            {
+                m_mainInputActivated?.Invoke();
+            }
         }
 
         /// <summary>

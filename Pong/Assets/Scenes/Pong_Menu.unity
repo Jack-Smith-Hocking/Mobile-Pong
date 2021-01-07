@@ -205,12 +205,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 18928017}
-        m_MethodName: LoadSceneName
-        m_Mode: 5
+        m_MethodName: LoadSceneIndex
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: Pong_Game2P
           m_BoolArgument: 0
@@ -2308,6 +2308,11 @@ PrefabInstance:
       propertyPath: m_scoreToWin
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 329415772341337963, guid: 245388e3cfdd03b43b67df82196bdf0b,
+        type: 3}
+      propertyPath: m_canWin
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 245388e3cfdd03b43b67df82196bdf0b, type: 3}
 --- !u!1 &976489274
@@ -2541,15 +2546,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 18928017}
-        m_MethodName: LoadSceneName
-        m_Mode: 5
+      - m_Target: {fileID: 1085416681}
+        m_MethodName: LoadSceneIndex
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
-          m_StringArgument: Pong_Game1P
+          m_StringArgument: Pong_WallMode
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 588767278}
