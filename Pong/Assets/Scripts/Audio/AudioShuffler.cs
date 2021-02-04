@@ -3,9 +3,18 @@ using System.Collections.Generic;
 using Custom.Utility;
 using UnityEngine;
 
+public struct ClipData
+{
+    public AudioClip m_clip;
+    public float m_clipTime;
+    public float m_clipVolume;
+}
+
 [RequireComponent(typeof(AudioSource))]
 public class AudioShuffler : MonoBehaviour
 {
+    public static AudioShuffler Instance = null;
+
     public List<AudioClip> m_clips = new List<AudioClip>();
     public bool m_allowFadIn = true;
     [Range(0, 1)] public float m_fadeInPercent;
@@ -15,10 +24,24 @@ public class AudioShuffler : MonoBehaviour
 
     private AudioSource m_audioSource;
 
+    private static ClipData m_currentClipData = new ClipData();
+
     private AudioClip m_previousClip = null;
 
-    public void Start()
+    private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+
         m_audioSource = GetComponent<AudioSource>();
         m_baseVolume = m_audioSource.volume;
 
@@ -40,6 +63,7 @@ public class AudioShuffler : MonoBehaviour
             }
 
             m_audioSource.Play();
+            m_currentClipData.m_clip = newClip;
         }
     }
 
@@ -69,6 +93,9 @@ public class AudioShuffler : MonoBehaviour
             {
                 ChangeClips(GetRandomClip());
             }
+
+            m_currentClipData.m_clipTime = m_audioSource.time - 0.1f;
+            m_currentClipData.m_clipVolume = m_audioSource.volume;
         }
     }
 
