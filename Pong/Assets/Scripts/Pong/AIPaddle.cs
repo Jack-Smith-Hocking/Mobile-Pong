@@ -15,6 +15,8 @@ namespace Pong
 
     public class AIPaddle : PongController
     {
+        public bool m_setHighScore = false;
+        [Space]
         public Transform m_fakeBackWall = null;
         [Space]
         [Min(0)] public int m_reflectionResolution = 5;
@@ -28,6 +30,11 @@ namespace Pong
             base.Start();
 
             InvokeRepeating(nameof(SetTarget), 0, 0.25f);
+
+            if (m_setHighScore)
+            {
+                HighScore.Instance.LoadHighScore("AI");
+            }
         }
 
         void SetTarget()

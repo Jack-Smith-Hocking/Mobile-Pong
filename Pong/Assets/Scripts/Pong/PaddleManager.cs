@@ -7,8 +7,8 @@ namespace Pong
 {
     public enum PaddleState
     {
-        AI,
-        PLAYER
+        AI = 0,
+        PLAYER = 1
     }
 
     public class PaddleManager : MonoBehaviour

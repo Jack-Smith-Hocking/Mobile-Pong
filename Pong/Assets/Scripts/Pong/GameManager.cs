@@ -49,6 +49,8 @@ namespace Pong
         public void IncrementP1()
         {
             IncrementScore(PlayerID.PLAYER_ONE, "Player One");
+
+            HighScore.Instance.UpdateHighscore(m_playerScores[PlayerID.PLAYER_ONE]);
         }
         #endregion
 

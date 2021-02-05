@@ -22,8 +22,7 @@ namespace Pong
 
         public void Awake()
         {
-            Settings.LoadMatchSettings();
-            m_matchSettings = Settings.m_matchSettings;
+            m_matchSettings = Settings.LoadMatchSettings();
 
             UpdatePaddle(m_paddleOneAI, m_paddleOnePlayer, m_matchSettings.m_playerOneState);
             UpdatePaddle(m_paddleTwoAI, m_paddleTwoPlayer, m_matchSettings.m_playerTwoState);

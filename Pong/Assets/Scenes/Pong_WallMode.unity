@@ -754,6 +754,7 @@ MonoBehaviour:
   m_moveSpeed: 15
   m_deadmanZone: 0.05
   m_verticalBounds: {x: -13.3, y: 13.3}
+  m_setHighScore: 1
   m_useMobileControls: 1
 --- !u!61 &389140625
 BoxCollider2D:
@@ -818,6 +819,7 @@ MonoBehaviour:
   m_moveSpeed: 15
   m_deadmanZone: 0.1
   m_verticalBounds: {x: -13.3, y: 13.3}
+  m_setHighScore: 1
   m_fakeBackWall: {fileID: 1756899629}
   m_reflectionResolution: 5
   m_reflectionLayers:
@@ -3360,7 +3362,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 657966025, guid: aed74d21dae3e444bb4b90ca046fed93, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 657966025, guid: aed74d21dae3e444bb4b90ca046fed93, type: 3}
+      propertyPath: m_Name
+      value: High Score - Text
+      objectReference: {fileID: 0}
+    - target: {fileID: 657966027, guid: aed74d21dae3e444bb4b90ca046fed93, type: 3}
+      propertyPath: m_text
+      value: 'High Score: '
+      objectReference: {fileID: 0}
+    - target: {fileID: 657966027, guid: aed74d21dae3e444bb4b90ca046fed93, type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 657966027, guid: aed74d21dae3e444bb4b90ca046fed93, type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 657966027, guid: aed74d21dae3e444bb4b90ca046fed93, type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1144203303397132501, guid: aed74d21dae3e444bb4b90ca046fed93,
         type: 3}
@@ -3489,6 +3511,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aed74d21dae3e444bb4b90ca046fed93, type: 3}
+--- !u!114 &1144203303297663627 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 657966027, guid: aed74d21dae3e444bb4b90ca046fed93,
+    type: 3}
+  m_PrefabInstance: {fileID: 1144203303297663626}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1326539650517464042
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3657,6 +3691,21 @@ MonoBehaviour:
   m_paddleOnePlayer: {fileID: 389140624}
   m_paddleTwoAI: {fileID: 0}
   m_paddleTwoPlayer: {fileID: 0}
+--- !u!114 &1326539650517464046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326539650517464043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d580a03024b864abf769d5f1c7d699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_highscoreText: {fileID: 1144203303297663627}
+  m_highScore: 0
+  m_scoreHolder: 
 --- !u!114 &1326539650517464047 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 329415772341337963, guid: 245388e3cfdd03b43b67df82196bdf0b,

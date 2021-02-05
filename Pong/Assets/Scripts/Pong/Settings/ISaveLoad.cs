@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ISave
+public interface ISaveLoad
 {
     void Save();
+    void Load();
 }

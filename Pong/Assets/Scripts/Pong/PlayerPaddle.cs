@@ -8,6 +8,7 @@ namespace Pong
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerPaddle : PongController
     {
+        public bool m_setHighScore = false;
         public bool m_useMobileControls = false;
 
         private Rigidbody2D m_rigidbody = null;
@@ -20,6 +21,11 @@ namespace Pong
             base.Start();
 
             m_rigidbody = GetComponent<Rigidbody2D>();
+
+            if (m_setHighScore)
+            {
+                HighScore.Instance.LoadHighScore("PLAYER");
+            }
         }
 
         private void FixedUpdate()

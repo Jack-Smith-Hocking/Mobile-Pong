@@ -5,7 +5,7 @@ using UnityEngine;
 public class SaveManager : MonoBehaviour
 {
     public static SaveManager Instance = null;
-    public List<ISave> m_saveDatas = new List<ISave>();
+    public static List<ISaveLoad> m_managed = new List<ISaveLoad>();
 
     private void Awake()
     {
@@ -14,9 +14,21 @@ public class SaveManager : MonoBehaviour
 
     public void SaveData()
     {
-        foreach (var save in m_saveDatas)
+        foreach (var save in m_managed)
         {
             save.Save();
         }
+    }
+    public void LoadData()
+    {
+        foreach (var load in m_managed)
+        {
+            load.Load();
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveData();   
     }
 }

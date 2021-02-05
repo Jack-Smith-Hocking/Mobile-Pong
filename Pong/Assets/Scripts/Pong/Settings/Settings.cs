@@ -11,17 +11,19 @@ namespace Pong
     [System.Serializable]
     public struct MatchSettings
     {
+        public static string P1_State_Pref { get { return "P1_State"; } }
+        public static string P2_State_Pref { get { return "P2_State"; } }
+        public static string Win_Score_Pref { get { return "Win_Score"; } }
+
         public PaddleState m_playerOneState;
         public PaddleState m_playerTwoState;
         [Space]
         public int m_scoreToWin;
     }
 
-    public class Settings : MonoBehaviour, ISave
+    public class Settings : MonoBehaviour, ISaveLoad
     {
-        public static string m_matchFilePath { get; private set; } = ".txt";
         public static MatchSettings m_matchSettings = new MatchSettings();
-
 
         [Header("Match UI")]
         public Button m_playerOneState = null;
@@ -36,15 +38,14 @@ namespace Pong
 
         private void Start()
         {
-            SaveManager.Instance.m_saveDatas.Add(this);
+            SaveManager.m_managed.Add(this);
 
             InitMatchData();
         }
 
         void InitMatchData()
         {
-            m_matchFilePath = Application.persistentDataPath + " - MatchData.txt";
-            LoadMatchSettings();
+            Load();
 
             m_playerOneStateText = m_playerOneState.GetComponentInChildren<TextMeshProUGUI>();
             m_playerTwoStateText = m_playerTwoState.GetComponentInChildren<TextMeshProUGUI>();
@@ -137,45 +138,57 @@ namespace Pong
         #endregion
 
         #region MatchSettings
-        private void OnApplicationQuit()
+        #region Save
+        public static void SaveDefault()
         {
-            SaveMatchSettings();
+            SaveMatchSettings(1, 1, 5);
         }
-
-        public static void LoadDefaultMatchSettings()
-        {
-            m_matchSettings = new MatchSettings();
-
-            m_matchSettings.m_playerOneState = PaddleState.PLAYER;
-            m_matchSettings.m_playerTwoState = PaddleState.PLAYER;
-
-            m_matchSettings.m_scoreToWin = 10;
-
-            StaticSaveMatchSettings();
-        }
-        public static void LoadMatchSettings()
-        {
-            bool _loadedFile = false;
-            m_matchSettings = FileUtil.LoadData<MatchSettings>(m_matchFilePath, out _loadedFile);
-
-            if (!_loadedFile)
-            {
-                LoadDefaultMatchSettings();
-            }
-        }
-        public static void StaticSaveMatchSettings()
-        {
-            FileUtil.SaveData<MatchSettings>(m_matchSettings, m_matchFilePath);
-        }
-        public void SaveMatchSettings()
-        {
-            StaticSaveMatchSettings();
-        }
-
         public void Save()
         {
-            StaticSaveMatchSettings();
+            SaveMatchSettings((int)m_matchSettings.m_playerOneState, (int)m_matchSettings.m_playerTwoState, m_matchSettings.m_scoreToWin);
         }
+        public static void SaveMatchSettings(int playerOneState, int playerTwoState, int winScore)
+        {
+            PlayerPrefs.SetInt(MatchSettings.P1_State_Pref, playerOneState);
+            PlayerPrefs.SetInt(MatchSettings.P2_State_Pref, playerTwoState);
+            PlayerPrefs.SetInt(MatchSettings.Win_Score_Pref, winScore);
+
+            PlayerPrefs.Save();
+        }
+        #endregion
+
+        #region Load
+        public void Load()
+        {
+            if (!PlayerPrefs.HasKey(MatchSettings.P1_State_Pref))
+            {
+                SaveDefault();
+            }
+
+            m_matchSettings = new MatchSettings();
+
+            m_matchSettings.m_playerOneState = (PaddleState)PlayerPrefs.GetInt(MatchSettings.P1_State_Pref);
+            m_matchSettings.m_playerTwoState = (PaddleState)PlayerPrefs.GetInt(MatchSettings.P2_State_Pref);
+
+            m_matchSettings.m_scoreToWin = PlayerPrefs.GetInt(MatchSettings.Win_Score_Pref);
+        }
+        public static MatchSettings LoadMatchSettings()
+        {
+            if (!PlayerPrefs.HasKey(MatchSettings.P1_State_Pref))
+            {
+                SaveDefault();
+            }
+
+            MatchSettings _settings = new MatchSettings();
+
+            _settings.m_playerOneState = (PaddleState)PlayerPrefs.GetInt(MatchSettings.P1_State_Pref);
+            _settings.m_playerTwoState = (PaddleState)PlayerPrefs.GetInt(MatchSettings.P2_State_Pref);
+
+            _settings.m_scoreToWin = PlayerPrefs.GetInt(MatchSettings.Win_Score_Pref);
+
+            return _settings;
+        }
+        #endregion
         #endregion
     }
 }
